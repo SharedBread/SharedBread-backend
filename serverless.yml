@@ -16,7 +16,7 @@ provider:
 
 functions:
   shoppingBasket:
-    handler: shoppingBasket.app
+    handler: shoppingBasket.handler
     events:
       - http:
           path: /basket
