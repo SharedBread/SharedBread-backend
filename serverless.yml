@@ -33,4 +33,11 @@ functions:
       - http:
           path: /basket/{id}
           method: DELETE
+          cors: true
+  userProfileData:
+    handler: userProfileData.handler
+    events:
+      - http:
+          path: /profile
+          method: GET
           cors: true  
