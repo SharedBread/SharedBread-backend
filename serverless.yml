@@ -1,3 +1,5 @@
+org: bradleynichol
+app: sharedbread-backend-app
 
 # For full config options, check the docs:
 #    docs.serverless.com
@@ -16,10 +18,10 @@ functions:
   shoppingBasket:
     handler: shoppingBasket.app
     events:
-      -http:
-        path: /basket
-        method: GET
-        cors: true
+      - http:
+          path: /basket
+          method: GET
+          cors: true
       - http:
           path: /basket
           method: POST
