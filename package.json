@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/SharedBread/SharedBread-backend#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "serverless-http": "^2.4.1"
