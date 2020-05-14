@@ -15,3 +15,16 @@ provider:
 functions:
   shoppingBasket:
     handler: shoppingBasket.app
+    events:
+      -http:
+        path: /basket
+        method: get
+        cors: true
+      - http:
+          path: /basket
+          method: POST
+          cors: true 
+      - http:
+          path: /basket/{id}
+          method: DELETE
+          cors: true  
