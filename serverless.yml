@@ -11,16 +11,16 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
+  environment:
+      DB_HOST: ${opt:DB_HOST}
+      DB_USER: ${opt:DB_USER}
+      DB_PASSWORD: ${opt:DB_PASSWORD}
 
 
 
 functions:
   shoppingBasket:
     handler: shoppingBasket.handler
-    environment:
-      DB_HOST: ${opt:DB_HOST}
-      DB_USER: ${opt:DB_USER}
-      DB_PASSWORD: ${opt:DB_PASSWORD}
     events:
       - http:
           path: /basket
