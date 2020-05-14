@@ -9,6 +9,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get('/basket', (req, res) => {
+  res.send("Success!");
+})
+
 
 
 module.exports.handler = serverless(app);
