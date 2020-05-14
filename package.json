@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SharedBread/SharedBread-backend/issues"
   },
-  "homepage": "https://github.com/SharedBread/SharedBread-backend#readme"
+  "homepage": "https://github.com/SharedBread/SharedBread-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
