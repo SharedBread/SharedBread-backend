@@ -7,6 +7,7 @@ const mysql = require('mysql');
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 
 
