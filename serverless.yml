@@ -37,6 +37,6 @@ functions:
     handler: userProfileData.handler
     events:
       - http:
-          path: /profile
+          path: /profile/{userId}
           method: GET
           cors: true  

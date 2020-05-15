@@ -17,18 +17,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/profile/:userId', (request, response) => {
-  const { userId } = request.params;
+app.get('/profile/:userId', (req, res) => {
+  const { userId } = req.params;
 
-
-  db.query('SELECT * FROM UserTable', (err, data) => {
-    if (err) {
-      console.log('Error from MySQL', err);
-      response.status(500).send(err);
-    } else {
-      response.status(200).send(data);
-    }
-  });
+  res.send(userId);
 });
 
 
