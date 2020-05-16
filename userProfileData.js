@@ -19,12 +19,12 @@ app.use(bodyParser.json());
 
 // get user profile info
 app.post("/profile", (req, res) => {
-  const { userId } = req.params;
-  // get the new users info
-  const newUser = req.body;
+
+  // get the users info
+  const user = req.body;
 
   const query = "SELECT * FROM UserTable WHERE AuthId = ?";
-  db.query(query, newUser.AuthID, (err, data) => {
+  db.query(query, user.AuthID, (err, data) => {
     if (err) {
       res.status(500).send(err);
 
@@ -34,7 +34,7 @@ app.post("/profile", (req, res) => {
         "INSERT INTO UserTable (FirstName, AuthID ) VALUES (?, ?)";
       db.query(
         query,
-        [newUser.FirstName, newUser.AuthID],
+        [user.FirstName, user.AuthID],
         (newErr, newData) => {
           if (newErr) {
             res.status(500).send(newErr);
@@ -47,7 +47,7 @@ app.post("/profile", (req, res) => {
 
     const query =
       "SELECT Amount, Date, FoodItem FROM UserTable JOIN FoodDonations ON FoodDonations.UserID = UserTable.UserID WHERE AuthID =?";
-    db.query(query, userId, (err, data) => {
+    db.query(query, user.AuthID, (err, data) => {
       if (err) {
         res.status(500).send(err);
       } else {
