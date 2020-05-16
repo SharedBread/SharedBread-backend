@@ -23,7 +23,7 @@ app.get("/profile/:userId", (req, res) => {
   // get the new users info
   const newUser = req.body;
 
-  const query = "SELECT * FROM UserTable WHERE userId = ?";
+  const query = "SELECT * FROM UserTable JOIN FoodDonations ON UserTable.UserID = FoodDonations.ID WHERE AuthId = ?";
   db.query(query, userId, (err, data) => {
     if (err) {
       console.log("Error from MySQL", err);
