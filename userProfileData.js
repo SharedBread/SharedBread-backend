@@ -18,20 +18,20 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // get user profile info
-app.get("/profile/:userId", (req, res) => {
+app.post("/profile", (req, res) => {
   const { userId } = req.params;
   // get the new users info
   const newUser = req.body;
 
   const query = "SELECT * FROM UserTable WHERE AuthId = ?";
-  db.query(query, userId, (err, data) => {
+  db.query(query, newUser.AuthID, (err, data) => {
     if (err) {
       res.status(500).send(err);
 
       // if no user is found, add the user to the DB
     } else if (!data.length) {
       const query =
-        "INSERT INTO UserTable (FirstName, AuthID ) VALUES (?, ?, ?)";
+        "INSERT INTO UserTable (FirstName, AuthID ) VALUES (?, ?)";
       db.query(
         query,
         [newUser.FirstName, newUser.AuthID],
