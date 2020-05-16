@@ -28,7 +28,7 @@ app.get("/profile/:userId", (req, res) => {
     if (err) {
       res.status(500).send(err);
 
-    // if no user is found, add the user to the DB
+      // if no user is found, add the user to the DB
     } else if (!data.length) {
       const query =
         "INSERT INTO UserTable (FirstName, PostCode, AuthID ) VALUES (?, ?, ?)";
@@ -39,20 +39,19 @@ app.get("/profile/:userId", (req, res) => {
           if (newErr) {
             res.status(500).send(newErr);
           } else {
-            res.status(200).send('User Added');
+            res.status(200).send("User Added");
           }
         }
       );
     } else {
-      const query = "SELECT * FROM FoodDonations WHERE UserID = ?"
+      const query = "SELECT * FROM FoodDonations WHERE UserID = ?";
       db.query(query, data[0].UserID, (err, data) => {
         if (err) {
           res.status(500).send(err);
         } else {
           res.status(200).send(data);
         }
-      })
-      
+      });
     }
   });
 });
