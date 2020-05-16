@@ -24,7 +24,7 @@ app.get("/profile/:userId", (req, res) => {
   const newUser = req.body;
 
   const query = "SELECT * FROM UserTable WHERE AuthId = ?";
-  db.query(query, userId, (err) => {
+  db.query(query, userId, (err, data) => {
     if (err) {
       res.status(500).send(err);
 
@@ -44,7 +44,7 @@ app.get("/profile/:userId", (req, res) => {
         }
       );
     } else {
-      res.status(200).send(data);
+      res.status(200).send(`${data[0].UserID}`);
     }
   });
 });
