@@ -39,7 +39,7 @@ app.get("/profile/:userId", (req, res) => {
           if (newErr) {
             res.status(500).send(newErr);
           } else {
-            res.status(200).send("User Added");
+            res.status(201).send("User Added");
           }
         }
       );
