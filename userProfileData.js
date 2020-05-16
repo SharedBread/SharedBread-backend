@@ -44,7 +44,15 @@ app.get("/profile/:userId", (req, res) => {
         }
       );
     } else {
-      res.status(200).send(`${data[0].UserID}`);
+      const query = "SELECT * FROM FoodDonations WHERE UserID = ?"
+      db.query(query, data[0].UserID, (err, data) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(data);
+        }
+      })
+      
     }
   });
 });
