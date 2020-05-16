@@ -31,10 +31,10 @@ app.get("/profile/:userId", (req, res) => {
       // if no user is found, add the user to the DB
     } else if (!data.length) {
       const query =
-        "INSERT INTO UserTable (FirstName, PostCode, AuthID ) VALUES (?, ?, ?)";
+        "INSERT INTO UserTable (FirstName, AuthID ) VALUES (?, ?, ?)";
       db.query(
         query,
-        [newUser.FirstName, newUser.PostCode, newUser.AuthID],
+        [newUser.FirstName, newUser.AuthID],
         (newErr, newData) => {
           if (newErr) {
             res.status(500).send(newErr);
