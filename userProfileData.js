@@ -43,16 +43,17 @@ app.get("/profile/:userId", (req, res) => {
           }
         }
       );
-    } else {
-      const query = "SELECT * FROM FoodDonations WHERE UserID = ?";
-      db.query(query, data[0].UserID, (err, data) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.status(200).send(data);
-        }
-      });
     }
+
+    const query =
+      "SELECT Amount, Date, FoodItem FROM UserTable JOIN FoodDonations ON FoodDonations.UserID = UserTable.UserID WHERE AuthID =?";
+    db.query(query, userId, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
   });
 });
 
