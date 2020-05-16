@@ -20,16 +20,17 @@ app.use(bodyParser.json());
 app.get("/profile/:userId", (req, res) => {
   const { userId } = req.params;
 
-  // const query = "SELECT * FROM UserTable";
-  // db.query("SELECT * FROM UserTable", (err, data) => {
-  //   if (err) {
-  //     console.log("Error from MySQL", err);
-  //     response.status(500).send(err);
-  //   } else {
-  //     response.status(200).send(data);
-  //   }
-  // });
-  res.send(userId)
+  const query = "SELECT * FROM UserTable WHERE userId = ?";
+  db.query(query, userId, (err, data) => {
+    if (err) {
+      console.log("Error from MySQL", err);
+      res.status(500).send(err);
+    } else if (!data.length){
+      res.send('no user')
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 module.exports.handler = serverless(app);
