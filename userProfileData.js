@@ -20,12 +20,8 @@ app.use(bodyParser.json());
 // get user profile info
 app.get("/profile/:userId", (req, res) => {
   const { userId } = req.params;
-
-  const newUser = {
-    FirstName: "Brad",
-    PostCode: "PR25 3NX",
-    AuthID: "124-afgfhak-123",
-  };
+  // get the new users info
+  const newUser = req.body;
 
   const query = "SELECT * FROM UserTable WHERE userId = ?";
   db.query(query, userId, (err, data) => {
