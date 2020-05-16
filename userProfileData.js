@@ -17,16 +17,37 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// get user profile info
 app.get("/profile/:userId", (req, res) => {
   const { userId } = req.params;
+
+  const newUser = {
+    FirstName: "Brad",
+    PostCode: "PR25 3NX",
+    AuthID: "124-afgfhak-123",
+  };
 
   const query = "SELECT * FROM UserTable WHERE userId = ?";
   db.query(query, userId, (err, data) => {
     if (err) {
       console.log("Error from MySQL", err);
       res.status(500).send(err);
-    } else if (!data.length){
-      res.send('no user')
+
+    // if no user is found, add the user to the DB
+    } else if (!data.length) {
+      const query =
+        "INSERT INTO UserTable (FirstName, PostCode, AuthID ) VALUES (?, ?, ?)";
+      db.query(
+        query,
+        [newUser.FirstName, newUser.PostCode, newUser.AuthID],
+        (newErr, newData) => {
+          if (newErr) {
+            res.status(500).send(err);
+          } else {
+            res.status(200).send('User Added');
+          }
+        }
+      );
     } else {
       res.status(200).send(data);
     }
