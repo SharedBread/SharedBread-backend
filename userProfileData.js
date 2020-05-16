@@ -37,7 +37,7 @@ app.get("/profile/:userId", (req, res) => {
         [newUser.FirstName, newUser.PostCode, newUser.AuthID],
         (newErr, newData) => {
           if (newErr) {
-            res.status(500).send(err);
+            res.status(500).send(newErr);
           } else {
             res.status(200).send('User Added');
           }
