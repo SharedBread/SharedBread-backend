@@ -39,4 +39,11 @@ functions:
       - http:
           path: /profile
           method: POST
-          cors: true  
+          cors: true
+  addToShoppingBasket:
+    handler: addToShoppingBasket.handler
+    events:
+      - http:
+          path: /addToBasket
+          method: POST
+          cors: true    
