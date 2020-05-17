@@ -17,16 +17,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/basket', (request, response) => {
-  db.query('SELECT * FROM UserTable', (err, data) => {
-    if (err) {
-      console.log('Error from MySQL', err);
-      response.status(500).send(err);
-    } else {
-      response.status(200).send(data);
-    }
-  });
-});
+
 
 
 
