@@ -17,13 +17,25 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/addToBasket', (request, response) => {
-  db.query('SELECT * FROM UserTable', (err, data) => {
+app.post('/addToBasket', (req, res) => {
+  
+  // get the body info
+  const body = req.body;
+
+  db.query('SELECT * FROM UserTable WHERE AuthID =?', body.AuthID, (err, data) => {
     if (err) {
       console.log('Error from MySQL', err);
-      response.status(500).send(err);
+      res.status(500).send(err);
     } else {
-      response.status(200).send(data);
+      const query = "INSERT INTO ShoppingBasket (FoodItem, UserID) VALUES (?, ?)"
+      db.query(query, [body.FoodItem, data[0].UserID], (newErr, data) => {
+        if (newErr) {
+          res.status(500).send(newErr)
+        } else {
+          res.status(200).send(data);
+        }
+         
+      }) 
     }
   });
 });
