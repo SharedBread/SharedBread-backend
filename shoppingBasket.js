@@ -18,6 +18,17 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
+app.get('/basket', function (request, response){
+  
+  db.query("SELECT * FROM ShoppingBasket", function(err, data){
+    if(err){
+      console.log("Error from MYSQL", err);
+      response.status(500).sendFile(err);
+    }else {
+      response.status(200).send(data);
+    };
+  });
+});
 
 
 
