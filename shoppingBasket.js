@@ -16,13 +16,13 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-
  
-app.get('/basket', function (request, response) {
+ 
+app.get('/basket/:id', function (request, response) {
 
-  const data = request.body;
+  const { id } = request.params;
 
-  db.query(`SELECT * FROM ShoppingBasket WHERE UserID=?`, [data.UserID], function (err, data) {
+  db.query(`SELECT * FROM ShoppingBasket WHERE UserID=?`, id , function (err, data) {
     if (err) {
       console.log("Error from MYSQL", err);
       response.status(500).send(err);
