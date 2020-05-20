@@ -94,24 +94,16 @@ app.post("/basket", function (request, response) {
   );
 });
 
-app.delete("/basket", function (request, response) {
-  const data = request.body;
+app.delete("/basket/:id", function (request, response) {
+  const {id} = request.params;
 
   const query = "DELETE FROM ShoppingBasket WHERE ID= ?";
-  db.query(query, [data.ID], (err, data) => {
+  db.query(query, [id], (err, data) => {
     if (err) {
       console.log("Error from MySQL", err);
       response.status(500).send(err);
     } else {
-      const query = `SELECT * FROM ShoppingBasket WHERE UserID =?`;
-      db.query(query, [data.UserID], (err, results) => {
-        if (err) {
-          console.log("Error from MySQL", err);
-          response.status(500).send(err);
-        } else {
-          response.status(200).send(results);
-        }
-      });
+      response.status(200).send('deleted')
     }
   });
 });
