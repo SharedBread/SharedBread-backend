@@ -22,7 +22,7 @@ functions:
     handler: shoppingBasket.handler
     events:
       - http:
-          path: /basket
+          path: /basket/{id}
           method: GET
           cors: true
       - http:
