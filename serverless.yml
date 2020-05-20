@@ -30,7 +30,7 @@ functions:
           method: POST
           cors: true 
       - http:
-          path: /basket
+          path: /basket/{id}
           method: DELETE
           cors: true
   userProfileData:
