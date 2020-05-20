@@ -20,16 +20,28 @@ app.use(bodyParser.json());
  
 app.get('/basket/:id', function (request, response) {
 
-  const { id } = request.params;
+  const  {id} = request.params;
 
-  db.query(`SELECT * FROM ShoppingBasket WHERE UserID=?`, id , function (err, data) {
+  db.query('SELECT * FROM UserTable WHERE AuthID = ?', [`${id}`], function (err, data) {
     if (err) {
       console.log("Error from MYSQL", err);
       response.status(500).send(err);
     } else {
-      response.status(200).send(data);
+      
+      db.query(`SELECT * FROM ShoppingBasket WHERE UserID=?`, [`${data[0].UserID}`], function (err, result) {
+        if (err) {
+          console.log("Error from MYSQL", err);
+          response.status(500).send(err);
+        } else {
+          response.status(200).send(result);
+        }
+      });
     }
   });
+
+
+
+  
 });
 
 
