@@ -19,7 +19,6 @@ app.use(bodyParser.json());
 
 // get user profile info
 app.post("/profile", (req, res) => {
-
   // get the users info
   const user = req.body;
 
@@ -29,31 +28,17 @@ app.post("/profile", (req, res) => {
       res.status(500).send(err);
 
       // if no user is found, add the user to the DB
-    } else if (!data.length) {
+    } else {
       const query =
-        "INSERT INTO UserTable (FirstName, AuthID ) VALUES (?, ?)";
-      db.query(
-        query,
-        [user.FirstName, user.AuthID],
-        (newErr, newData) => {
-          if (newErr) {
-            res.status(500).send(newErr);
-          } else {
-            res.status(201).send("User Added");
-          }
+        "SELECT Amount, Date, FoodItem FROM UserTable JOIN FoodDonations ON FoodDonations.UserID = UserTable.UserID WHERE AuthID =?";
+      db.query(query, user.AuthID, (err, data) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(data);
         }
-      );
+      });
     }
-
-    const query =
-      "SELECT Amount, Date, FoodItem FROM UserTable JOIN FoodDonations ON FoodDonations.UserID = UserTable.UserID WHERE AuthID =?";
-    db.query(query, user.AuthID, (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(data);
-      }
-    });
   });
 });
 
