@@ -95,7 +95,7 @@ app.post("/basket", function (request, response) {
 });
 
 app.delete("/basket/:id", function (request, response) {
-  const {id} = request.params;
+  const { id } = request.params;
 
   const query = "DELETE FROM ShoppingBasket WHERE ID= ?";
   db.query(query, [id], (err, data) => {
@@ -103,7 +103,7 @@ app.delete("/basket/:id", function (request, response) {
       console.log("Error from MySQL", err);
       response.status(500).send(err);
     } else {
-      response.status(200).send('deleted')
+      response.status(200).send("deleted");
     }
   });
 });
