@@ -47,3 +47,10 @@ functions:
           path: /addToBasket
           method: POST
           cors: true
+  createUser:
+    handler: createUser.handler
+    events:
+      - http:
+          path: /createuser
+          method: POST
+          cors: true
