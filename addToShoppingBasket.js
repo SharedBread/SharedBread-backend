@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/addToBasket/api', (req, res) => {
+app.post('/addToBasket', (req, res) => {
   
   // get the body info
   const body = req.body;
