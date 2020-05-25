@@ -44,10 +44,6 @@ functions:
     handler: addToShoppingBasket.handler
     events:
       - http:
-          path: /addToBasket/api
+          path: /addToBasket
           method: POST
           cors: true
-      - http:
-          path: /addToBasket/user
-          method: POST
-          cors: true     
