@@ -43,6 +43,8 @@ app.post("/createuser", (req, res) => {
           }
         }
       );
+    } else {
+      res.status(200).send("User OK")
     }
   });
 });
