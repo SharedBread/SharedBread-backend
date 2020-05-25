@@ -17,10 +17,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// get user profile info
-app.post("/create", (req, res) => {
 
-  // get the users info
+app.post("/createuser", (req, res) => {
+
+  // get the users data
   const user = req.body;
 
   const query = "SELECT * FROM UserTable WHERE AuthId = ?";
