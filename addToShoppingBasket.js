@@ -47,28 +47,6 @@ app.post('/addToBasket/api', (req, res) => {
   });
 });
 
-app.post('/addToBasket/user', (req, res) => {
-  
-  // get the body info
-  const body = req.body;
-
-  db.query('SELECT * FROM UserTable WHERE AuthID =?', body.AuthID, (err, data) => {
-    if (err) {
-      console.log('Error from MySQL', err);
-      res.status(500).send(err);
-    } else {
-      const query = "INSERT INTO ShoppingBasket (FoodItem, UserID) VALUES (?, ?)"
-      db.query(query, [body.FoodItem, data[0].UserID], (newErr, data) => {
-        if (newErr) {
-          res.status(500).send(newErr)
-        } else {
-          res.status(200).send(data);
-        }
-         
-      }) 
-    }
-  });
-});
 
 
 
